@@ -16,6 +16,8 @@ type
     class var FCustomers: IList<TCustomer>;
     class function CloneCustomer(const ACustomer: TCustomer): TCustomer;
     class function ConvertIListToTObjectList(const AList: IList<TCustomer>): TObjectList<TCustomer>;
+  private
+    FGuid: TGuid;
   public
     class constructor Create;
 
@@ -62,7 +64,8 @@ end;
 
 constructor TCustomerRepository.Create;
 begin
-  Log.Info('TCustomerRepository.Create', 'life_cicle');
+  FGuid := TGuid.NewGuid;
+  Log.Info('%s - TCustomerRepository.Create', [FGuid.ToString], 'life_cicle');
 end;
 
 class constructor TCustomerRepository.Create;
@@ -82,7 +85,7 @@ end;
 
 destructor TCustomerRepository.Destroy;
 begin
-  Log.Info('TCustomerRepository.Destroy', 'life_cicle');
+  Log.Info('%s - TCustomerRepository.Destroy', [FGuid.ToString], 'life_cicle');
 
   inherited;
 end;

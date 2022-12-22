@@ -6,16 +6,19 @@ uses
   MVCFramework,
   MVCFramework.Commons,
   MVCFramework.Serializer.Commons,
-  UCustomer.Interfaces;
+  UCustomer.Interfaces,
+  Spring.Container.Common;
 
 type
 
   [MVCPath('/api')]
   TCustomerController = class(TMVCController)
   private
+    FGuid: TGuid;
+    [Inject]
     FCustomerService: ICustomerService;
   public
-    constructor Create(const ACustomerService: ICustomerService); reintroduce;
+    constructor Create; override;
     destructor Destroy; override;
 
     // Sample CRUD Actions for a "Customer" entity
@@ -60,11 +63,12 @@ begin
   Render(FCustomerService.GetCustomer(id));
 end;
 
-constructor TCustomerController.Create(const ACustomerService: ICustomerService);
+constructor TCustomerController.Create;
 begin
   inherited Create;
-  FCustomerService := ACustomerService;
-  Log.Info('TCustomerController.Create', 'life_cicle');
+  FGuid := TGuid.NewGuid;
+//  FCustomerService := ACustomerService;
+  Log.Info('%s - TCustomerController.Create', [FGuid.ToString], 'life_cicle');
 end;
 
 procedure TCustomerController.CreateCustomer;
@@ -101,7 +105,7 @@ end;
 
 destructor TCustomerController.Destroy;
 begin
-  Log.Info('TCustomerController.Destroy', 'life_cicle');
+  Log.Info('%s - TCustomerController.Destroy', [FGuid.ToString], 'life_cicle');
   inherited;
 end;
 

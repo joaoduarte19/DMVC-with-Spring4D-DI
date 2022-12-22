@@ -11,6 +11,7 @@ uses
 type
   TCustomerService = class(TInterfacedObject, ICustomerService)
   private
+    FGuid: TGuid;
     FCustomerRepository: ICustomerRepository;
   public
     constructor Create(const ACustomerRepository: ICustomerRepository);
@@ -33,8 +34,9 @@ uses
 
 constructor TCustomerService.Create(const ACustomerRepository: ICustomerRepository);
 begin
+  FGuid := TGuid.NewGuid;
   FCustomerRepository := ACustomerRepository;
-  Log.Info('TCustomerService.Create', 'life_cicle');
+  Log.Info('%s - TCustomerService.Create', [FGuid.ToString], 'life_cicle');
 end;
 
 function TCustomerService.DeleteCustomer(const AId: Integer): Boolean;
@@ -44,7 +46,7 @@ end;
 
 destructor TCustomerService.Destroy;
 begin
-  Log.Info('TCustomerService.Destroy', 'life_cicle');
+  Log.Info('%s - TCustomerService.Destroy', [FGuid.ToString], 'life_cicle');
   inherited;
 end;
 
