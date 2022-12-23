@@ -69,6 +69,8 @@ begin
   FGuid := TGuid.NewGuid;
   FDBContext := ADBContext;
   Log.Info('%s - TCustomerRepository.Create', [FGuid.ToString], 'life_cicle');
+  Log.Info('%s - TCustomerRepository.Create - DBContextId: %d', [FGuid.ToString, NativeInt(FDBContext)], 'life_cicle');
+
 end;
 
 class constructor TCustomerRepository.Create;

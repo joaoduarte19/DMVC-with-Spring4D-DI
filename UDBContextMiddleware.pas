@@ -61,6 +61,8 @@ begin
   Log.Info('%s - TDBContextMiddleware.OnBeforeRouting', [FGuid.ToString], 'life_cicle');
 
   FDBContext := GlobalContainer.Resolve<IDBContext>;
+
+  Log.Info('%s - TDBContextMiddleware.OnBeforeRouting - DBContextId: %d', [FGuid.ToString, NativeInt(FDBContext)], 'life_cicle');
   // Configs;
 end;
 
