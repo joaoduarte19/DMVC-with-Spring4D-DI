@@ -68,3 +68,4 @@ __recovery/
 *.zip
 *.7z
 *.txt
+/bin/DelphiMVCwithDI

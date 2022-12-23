@@ -3,7 +3,9 @@ program DelphiMVCwithDI;
 {$APPTYPE CONSOLE}
 
 uses
+{$IF defined(DEBUG) and defined(MSWINDOWS)}
   FastMM4,
+{$ENDIF}
   System.SysUtils,
   MVCFramework.Logger,
   MVCFramework.Commons,
@@ -35,7 +37,10 @@ var
   LCustomHandler: TMVCCustomREPLCommandsHandler;
   LCmd: string;
 begin
-  TDirectory.Delete('.\logs', True);
+{$IF defined(DEBUG)}
+  if TDirectory.Exists(AppPath + 'logs') then
+    TDirectory.Delete(AppPath + 'logs', True);
+{$ENDIF}
 
   Writeln('** DMVCFramework Server ** build ' + DMVCFRAMEWORK_VERSION);
   LCmd := 'start';
