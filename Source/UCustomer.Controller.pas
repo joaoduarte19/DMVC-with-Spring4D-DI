@@ -48,6 +48,7 @@ implementation
 
 uses
   System.SysUtils,
+  MVCFramework.Controllers.Register,
   MVCFramework.Logger,
   Spring.Container,
   UCustomer.Entity;
@@ -67,7 +68,7 @@ constructor TCustomerController.Create;
 begin
   inherited Create;
   FGuid := TGuid.NewGuid;
-//  FCustomerService := ACustomerService;
+// FCustomerService := ACustomerService;
   Log.Info('%s - TCustomerController.Create', [FGuid.ToString], 'life_cicle');
 end;
 
@@ -110,6 +111,12 @@ begin
 end;
 
 initialization
+
+TControllersRegister.Instance.RegisterController(TCustomerController,
+  function: TMVCController
+  begin
+    Result := GlobalContainer.Resolve<TCustomerController>;
+  end);
 
 GlobalContainer.RegisterType<TCustomerController>;
 

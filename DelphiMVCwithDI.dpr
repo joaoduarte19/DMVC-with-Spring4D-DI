@@ -1,4 +1,4 @@
-program TestRepositoryServiceDI;
+program DelphiMVCwithDI;
 
 {$APPTYPE CONSOLE}
 
@@ -15,16 +15,16 @@ uses
   IdHTTPWebBrokerBridge,
   Spring.Container,
   System.IOUtils,
-  UCustomer.Controller in 'UCustomer.Controller.pas',
-  UWebModule in 'UWebModule.pas' {ServerWebModule: TWebModule},
-  UCustomer.Interfaces in 'UCustomer.Interfaces.pas',
-  UCustomer.Entity in 'UCustomer.Entity.pas',
-  UCustomer.Service in 'UCustomer.Service.pas',
-  UCustomer.Repository in 'UCustomer.Repository.pas',
-  UDBContext.Interfaces in 'UDBContext.Interfaces.pas',
-  UDBContext.FireDAC in 'UDBContext.FireDAC.pas',
-  UDBContextMiddleware in 'UDBContextMiddleware.pas',
-  UDBContextLifetime in 'UDBContextLifetime.pas';
+  UCustomer.Controller in 'Source\UCustomer.Controller.pas',
+  UWebModule in 'Source\UWebModule.pas' {ServerWebModule: TWebModule},
+  UCustomer.Interfaces in 'Source\UCustomer.Interfaces.pas',
+  UCustomer.Entity in 'Source\UCustomer.Entity.pas',
+  UCustomer.Service in 'Source\UCustomer.Service.pas',
+  UCustomer.Repository in 'Source\UCustomer.Repository.pas',
+  UDBContext.Interfaces in 'Source\UDBContext.Interfaces.pas',
+  UDBContext.FireDAC in 'Source\UDBContext.FireDAC.pas',
+  UDBContextMiddleware in 'Source\UDBContextMiddleware.pas',
+  UDBContextLifetime in 'Source\UDBContextLifetime.pas';
 
 {$R *.res}
 

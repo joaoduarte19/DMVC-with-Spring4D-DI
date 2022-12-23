@@ -8,7 +8,7 @@
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Console</AppType>
-        <MainSource>TestRepositoryServiceDI.dpr</MainSource>
+        <MainSource>DelphiMVCwithDI.dpr</MainSource>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -45,7 +45,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
+        <DCC_DcuOutput>.\__dcu\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_ExeOutput>.\bin</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
         <DCC_N>false</DCC_N>
@@ -56,9 +56,8 @@
         <UsingDelphiRTL>true</UsingDelphiRTL>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
-        <DCC_UnitSearchPath>$(DMVC);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_Framework>VCL;$(DCC_Framework)</DCC_Framework>
-        <SanitizedProjectName>TestRepositoryServiceDI</SanitizedProjectName>
+        <SanitizedProjectName>DelphiMVCwithDI</SanitizedProjectName>
         <VerInfo_Locale>1046</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
@@ -98,19 +97,19 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="UCustomer.Controller.pas"/>
-        <DCCReference Include="UWebModule.pas">
+        <DCCReference Include="Source\UCustomer.Controller.pas"/>
+        <DCCReference Include="Source\UWebModule.pas">
             <Form>ServerWebModule</Form>
             <DesignClass>TWebModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="UCustomer.Interfaces.pas"/>
-        <DCCReference Include="UCustomer.Entity.pas"/>
-        <DCCReference Include="UCustomer.Service.pas"/>
-        <DCCReference Include="UCustomer.Repository.pas"/>
-        <DCCReference Include="UDBContext.Interfaces.pas"/>
-        <DCCReference Include="UDBContext.FireDAC.pas"/>
-        <DCCReference Include="UDBContextMiddleware.pas"/>
-        <DCCReference Include="UDBContextLifetime.pas"/>
+        <DCCReference Include="Source\UCustomer.Interfaces.pas"/>
+        <DCCReference Include="Source\UCustomer.Entity.pas"/>
+        <DCCReference Include="Source\UCustomer.Service.pas"/>
+        <DCCReference Include="Source\UCustomer.Repository.pas"/>
+        <DCCReference Include="Source\UDBContext.Interfaces.pas"/>
+        <DCCReference Include="Source\UDBContext.FireDAC.pas"/>
+        <DCCReference Include="Source\UDBContextMiddleware.pas"/>
+        <DCCReference Include="Source\UDBContextLifetime.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -129,13 +128,11 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">TestRepositoryServiceDI.dpr</Source>
+                    <Source Name="MainSource">DelphiMVCwithDI.dpr</Source>
                 </Source>
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="I:\Embarcadero\Componentes\FastReport 6 VCL Enterprise\LibD27\dclfrxIBX27.bpl">FastReport 6.0 IBX Components</Excluded_Packages>
-                    <Excluded_Packages Name="I:\Embarcadero\Componentes\FastReport 6 VCL Enterprise\LibD27\dclfsIBX27.bpl">FastScript 1.9 IBX Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
@@ -154,9 +151,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="bin\TestRepositoryServiceDI.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="bin\DelphiMVCwithDI.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>TestRepositoryServiceDI.exe</RemoteName>
+                        <RemoteName>DelphiMVCwithDI.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

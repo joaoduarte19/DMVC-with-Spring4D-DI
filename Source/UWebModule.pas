@@ -32,6 +32,7 @@ uses
   MVCFramework.Commons,
   MVCFramework.Middleware.StaticFiles, 
   MVCFramework.Middleware.Compression,
+  MVCFramework.Controllers.Register,
   UDBContextMiddleware;
 
 procedure TServerWebModule.WebModuleCreate(Sender: TObject);
@@ -56,12 +57,7 @@ begin
       // Max request size in bytes
       Config[TMVCConfigKey.MaxRequestSize] := IntToStr(TMVCConstants.DEFAULT_MAX_REQUEST_SIZE);
     end);
-  FMVC.AddController(TCustomerController,
-    function: TMVCController
-    begin
-      Result := GlobalContainer.Resolve<TCustomerController>;
-    end
-  );
+  TControllersRegister.Instance.AddControllersInEngine(FMVC);
 
   // Enable the following middleware declaration if you want to
   // serve static files from this dmvcframework service.
