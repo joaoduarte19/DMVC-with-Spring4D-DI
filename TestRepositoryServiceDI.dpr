@@ -14,12 +14,15 @@ uses
   IdContext,
   IdHTTPWebBrokerBridge,
   Spring.Container,
+  System.IOUtils,
   UCustomer.Controller in 'UCustomer.Controller.pas',
   UWebModule in 'UWebModule.pas' {ServerWebModule: TWebModule},
   UCustomer.Interfaces in 'UCustomer.Interfaces.pas',
   UCustomer.Entity in 'UCustomer.Entity.pas',
   UCustomer.Service in 'UCustomer.Service.pas',
-  UCustomer.Repository in 'UCustomer.Repository.pas';
+  UCustomer.Repository in 'UCustomer.Repository.pas',
+  UDBContext.Interfaces in 'UDBContext.Interfaces.pas',
+  UDBContext.FireDAC in 'UDBContext.FireDAC.pas';
 
 {$R *.res}
 
@@ -30,6 +33,8 @@ var
   LCustomHandler: TMVCCustomREPLCommandsHandler;
   LCmd: string;
 begin
+  TDirectory.Delete('.\logs', True);
+
   Writeln('** DMVCFramework Server ** build ' + DMVCFRAMEWORK_VERSION);
   LCmd := 'start';
   if ParamCount >= 1 then

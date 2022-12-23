@@ -8,7 +8,8 @@ uses
   UCustomer.Interfaces,
   UCustomer.Entity,
   MVCFramework.Logger,
-  Spring.Collections;
+  Spring.Collections,
+  UDBContext.Interfaces;
 
 type
   TCustomerRepository = class(TInterfacedObject, ICustomerRepository)
@@ -18,10 +19,11 @@ type
     class function ConvertIListToTObjectList(const AList: IList<TCustomer>): TObjectList<TCustomer>;
   private
     FGuid: TGuid;
+    FDBContext: IDBContext;
   public
     class constructor Create;
 
-    constructor Create;
+    constructor Create(const ADBContext: IDBContext);
     destructor Destroy; override;
 
     function GetAllCustomers: TObjectList<TCustomer>;
@@ -62,9 +64,10 @@ begin
   Result := LObjectList;
 end;
 
-constructor TCustomerRepository.Create;
+constructor TCustomerRepository.Create(const ADBContext: IDBContext);
 begin
   FGuid := TGuid.NewGuid;
+  FDBContext := ADBContext;
   Log.Info('%s - TCustomerRepository.Create', [FGuid.ToString], 'life_cicle');
 end;
 
