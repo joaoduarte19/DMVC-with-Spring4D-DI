@@ -4,6 +4,7 @@ interface
 
 uses
   UDBContext.Interfaces,
+  System.Classes,
   Data.DB,
   FireDAC.Comp.Client;
 
@@ -24,13 +25,14 @@ implementation
 uses
   System.SysUtils,
   MVCFramework.Logger,
-  Spring.Container;
+  Spring.Container,
+  UDBContextLifetime;
 
 { TDBContextFireDAC }
 
 constructor TDBContextFireDAC.Create;
 begin
-  inherited;
+  inherited Create;
 
   FGuid := TGuid.NewGuid;
   FConnection := TFDConnection.Create(nil);
@@ -68,7 +70,6 @@ end;
 
 initialization
 
-GlobalContainer.RegisterType<TDBContextFireDAC>.Implements<IDBContext>.AsSingletonPerThread;
-
+GlobalContainer.RegisterType<IDBContext, TDBContextFireDAC>.AsCustom(DBContextLifetimeManager);
 
 end.

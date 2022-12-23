@@ -109,6 +109,8 @@
         <DCCReference Include="UCustomer.Repository.pas"/>
         <DCCReference Include="UDBContext.Interfaces.pas"/>
         <DCCReference Include="UDBContext.FireDAC.pas"/>
+        <DCCReference Include="UDBContextMiddleware.pas"/>
+        <DCCReference Include="UDBContextLifetime.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

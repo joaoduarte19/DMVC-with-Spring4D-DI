@@ -22,7 +22,9 @@ uses
   UCustomer.Service in 'UCustomer.Service.pas',
   UCustomer.Repository in 'UCustomer.Repository.pas',
   UDBContext.Interfaces in 'UDBContext.Interfaces.pas',
-  UDBContext.FireDAC in 'UDBContext.FireDAC.pas';
+  UDBContext.FireDAC in 'UDBContext.FireDAC.pas',
+  UDBContextMiddleware in 'UDBContextMiddleware.pas',
+  UDBContextLifetime in 'UDBContextLifetime.pas';
 
 {$R *.res}
 

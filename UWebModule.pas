@@ -31,7 +31,8 @@ uses
   System.IOUtils,
   MVCFramework.Commons,
   MVCFramework.Middleware.StaticFiles, 
-  MVCFramework.Middleware.Compression;
+  MVCFramework.Middleware.Compression,
+  UDBContextMiddleware;
 
 procedure TServerWebModule.WebModuleCreate(Sender: TObject);
 begin
@@ -70,8 +71,9 @@ begin
   //    TPath.Combine(ExtractFilePath(GetModuleName(HInstance)), 'www')) 
   //  );	
 
-  // To enable compression (deflate, gzip) just add this middleware as the last one 
+  // To enable compression (deflate, gzip) just add this middleware as the last one
   FMVC.AddMiddleware(TMVCCompressionMiddleware.Create);
+  FMVC.AddMiddleware(TDBContextMiddleware.Create);
 end;
 
 procedure TServerWebModule.WebModuleDestroy(Sender: TObject);
