@@ -1,10 +1,10 @@
-unit UCustomer.Interfaces;
+unit Domain.Interfaces.Customer;
 
 interface
 
 uses
   System.Generics.Collections,
-  UCustomer.Entity;
+  Domain.Entities.Customer;
 
 type
   ICustomerService = interface

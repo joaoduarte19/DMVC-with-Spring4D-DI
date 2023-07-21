@@ -1,15 +1,15 @@
-unit UCustomer.Repository;
+unit Infrastructure.Repositories.Customer;
 
 interface
 
 uses
   System.SysUtils,
   System.Generics.Collections,
-  UCustomer.Interfaces,
-  UCustomer.Entity,
+  Domain.Interfaces.Customer,
+  Domain.Entities.Customer,
   MVCFramework.Logger,
   Spring.Collections,
-  UDBContext.Interfaces;
+  Infrastructure.DbContext.Interfaces;
 
 type
   TCustomerRepository = class(TInterfacedObject, ICustomerRepository)
@@ -35,9 +35,6 @@ type
   end;
 
 implementation
-
-uses
-  Spring.Container;
 
 { TCustomerRepository }
 
@@ -144,9 +141,5 @@ begin
     Result := True;
   end;
 end;
-
-initialization
-
-GlobalContainer.RegisterType<TCustomerRepository>.Implements<ICustomerRepository>;
 
 end.

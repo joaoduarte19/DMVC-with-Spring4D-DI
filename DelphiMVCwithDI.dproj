@@ -97,19 +97,21 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Source\UCustomer.Controller.pas"/>
-        <DCCReference Include="Source\UWebModule.pas">
-            <Form>ServerWebModule</Form>
+        <DCCReference Include="Source\Application\Controllers\Application.Controllers.Customer.pas"/>
+        <DCCReference Include="Source\Application\Services\Application.Services.Customer.pas"/>
+        <DCCReference Include="Source\Application\Application.WebModule.pas">
+            <Form>AppWebModule</Form>
+            <FormType>dfm</FormType>
             <DesignClass>TWebModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="Source\UCustomer.Interfaces.pas"/>
-        <DCCReference Include="Source\UCustomer.Entity.pas"/>
-        <DCCReference Include="Source\UCustomer.Service.pas"/>
-        <DCCReference Include="Source\UCustomer.Repository.pas"/>
-        <DCCReference Include="Source\UDBContext.Interfaces.pas"/>
-        <DCCReference Include="Source\UDBContext.FireDAC.pas"/>
-        <DCCReference Include="Source\UDBContextMiddleware.pas"/>
-        <DCCReference Include="Source\UDBContextLifetime.pas"/>
+        <DCCReference Include="Source\Domain\Entities\Domain.Entities.Customer.pas"/>
+        <DCCReference Include="Source\Domain\Interfaces\Domain.Interfaces.Customer.pas"/>
+        <DCCReference Include="Source\Infrastructure\Infrastructure.DbContext.Interfaces.pas"/>
+        <DCCReference Include="Source\Infrastructure\Infrastructure.DbContext.pas"/>
+        <DCCReference Include="Source\Infrastructure\Repositories\Infrastructure.Repositories.Customer.pas"/>
+        <DCCReference Include="Source\Application\Application.DependencyInjection.pas"/>
+        <DCCReference Include="Source\Application\Application.DependencyInjection.SingletonPerScope.pas"/>
+        <DCCReference Include="Source\Application\Middlewares\Application.Middlewares.SingletonPerScopeFinalizer.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

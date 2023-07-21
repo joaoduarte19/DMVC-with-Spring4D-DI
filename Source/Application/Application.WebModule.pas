@@ -1,4 +1,4 @@
-unit UWebModule;
+unit Application.WebModule;
 
 interface
 
@@ -9,17 +9,17 @@ uses
   MVCFramework;
 
 type
-  TServerWebModule = class(TWebModule)
+  TAppWebModule = class(TWebModule)
     procedure WebModuleCreate(Sender: TObject);
     procedure WebModuleDestroy(Sender: TObject);
   private
-    FMVC: TMVCEngine;
+    FEngine: TMVCEngine;
   public
     { Public declarations }
   end;
 
 var
-  WebModuleClass: TComponentClass = TServerWebModule;
+  WebModuleClass: TComponentClass = TAppWebModule;
 
 implementation
 
@@ -27,17 +27,16 @@ implementation
 
 uses
   Spring.Container,
-  UCustomer.Controller,
   System.IOUtils,
   MVCFramework.Commons,
   MVCFramework.Middleware.StaticFiles, 
   MVCFramework.Middleware.Compression,
   MVCFramework.Controllers.Register,
-  UDBContextMiddleware;
+  Application.Middlewares.SingletonPerScopeFinalizer;
 
-procedure TServerWebModule.WebModuleCreate(Sender: TObject);
+procedure TAppWebModule.WebModuleCreate(Sender: TObject);
 begin
-  FMVC := TMVCEngine.Create(Self,
+  FEngine := TMVCEngine.Create(Self,
     procedure(Config: TMVCConfig)
     begin
       // session timeout (0 means session cookie)
@@ -57,24 +56,16 @@ begin
       // Max request size in bytes
       Config[TMVCConfigKey.MaxRequestSize] := IntToStr(TMVCConstants.DEFAULT_MAX_REQUEST_SIZE);
     end);
-  TControllersRegister.Instance.AddControllersInEngine(FMVC);
+  TControllersRegister.Instance.AddControllersInEngine(FEngine);
 
-  // Enable the following middleware declaration if you want to
-  // serve static files from this dmvcframework service.
-  // The folder mapped as documentroot must exists!
-  // FMVC.AddMiddleware(TMVCStaticFilesMiddleware.Create( 
-  //    '/static', 
-  //    TPath.Combine(ExtractFilePath(GetModuleName(HInstance)), 'www')) 
-  //  );	
 
-  // To enable compression (deflate, gzip) just add this middleware as the last one
-  FMVC.AddMiddleware(TMVCCompressionMiddleware.Create);
-  FMVC.AddMiddleware(TDBContextMiddleware.Create);
+  FEngine.AddMiddleware(TMVCCompressionMiddleware.Create);
+  FEngine.AddMiddleware(TSingletonPerScopeFinalizerMiddleware.Create);
 end;
 
-procedure TServerWebModule.WebModuleDestroy(Sender: TObject);
+procedure TAppWebModule.WebModuleDestroy(Sender: TObject);
 begin
-  FMVC.Free;
+  FEngine.Free;
 end;
 
 end.

@@ -1,12 +1,12 @@
-unit UCustomer.Service;
+unit Application.Services.Customer;
 
 interface
 
 uses
   System.SysUtils,
   System.Generics.Collections,
-  UCustomer.Interfaces,
-  UCustomer.Entity;
+  Domain.Interfaces.Customer,
+  Domain.Entities.Customer;
 
 type
   TCustomerService = class(TInterfacedObject, ICustomerService)
@@ -27,7 +27,6 @@ type
 implementation
 
 uses
-  Spring.Container,
   MVCFramework.Logger;
 
 { TCustomerService }
@@ -72,9 +71,5 @@ function TCustomerService.UpdateCustomer(const ACustomer: TCustomer): Boolean;
 begin
   Result := FCustomerRepository.UpdateCustomer(ACustomer);
 end;
-
-initialization
-
-GlobalContainer.RegisterType<TCustomerService>.Implements<ICustomerService>;
 
 end.

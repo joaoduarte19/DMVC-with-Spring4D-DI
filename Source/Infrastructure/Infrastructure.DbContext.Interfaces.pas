@@ -1,4 +1,4 @@
-unit UDBContext.Interfaces;
+unit Infrastructure.DbContext.Interfaces;
 
 interface
 

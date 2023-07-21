@@ -3,9 +3,9 @@ program DelphiMVCwithDI;
 {$APPTYPE CONSOLE}
 
 uses
-{$IF defined(DEBUG) and defined(MSWINDOWS)}
+  {$IF defined(DEBUG) and defined(MSWINDOWS)}
   FastMM4,
-{$ENDIF}
+  {$ENDIF }
   System.SysUtils,
   MVCFramework.Logger,
   MVCFramework.Commons,
@@ -17,16 +17,17 @@ uses
   IdHTTPWebBrokerBridge,
   Spring.Container,
   System.IOUtils,
-  UCustomer.Controller in 'Source\UCustomer.Controller.pas',
-  UWebModule in 'Source\UWebModule.pas' {ServerWebModule: TWebModule},
-  UCustomer.Interfaces in 'Source\UCustomer.Interfaces.pas',
-  UCustomer.Entity in 'Source\UCustomer.Entity.pas',
-  UCustomer.Service in 'Source\UCustomer.Service.pas',
-  UCustomer.Repository in 'Source\UCustomer.Repository.pas',
-  UDBContext.Interfaces in 'Source\UDBContext.Interfaces.pas',
-  UDBContext.FireDAC in 'Source\UDBContext.FireDAC.pas',
-  UDBContextMiddleware in 'Source\UDBContextMiddleware.pas',
-  UDBContextLifetime in 'Source\UDBContextLifetime.pas';
+  Application.Controllers.Customer in 'Source\Application\Controllers\Application.Controllers.Customer.pas',
+  Application.Services.Customer in 'Source\Application\Services\Application.Services.Customer.pas',
+  Application.WebModule in 'Source\Application\Application.WebModule.pas' {AppWebModule: TWebModule},
+  Domain.Entities.Customer in 'Source\Domain\Entities\Domain.Entities.Customer.pas',
+  Domain.Interfaces.Customer in 'Source\Domain\Interfaces\Domain.Interfaces.Customer.pas',
+  Infrastructure.DbContext.Interfaces in 'Source\Infrastructure\Infrastructure.DbContext.Interfaces.pas',
+  Infrastructure.DbContext in 'Source\Infrastructure\Infrastructure.DbContext.pas',
+  Infrastructure.Repositories.Customer in 'Source\Infrastructure\Repositories\Infrastructure.Repositories.Customer.pas',
+  Application.DependencyInjection in 'Source\Application\Application.DependencyInjection.pas',
+  Application.DependencyInjection.SingletonPerScope in 'Source\Application\Application.DependencyInjection.SingletonPerScope.pas',
+  Application.Middlewares.SingletonPerScopeFinalizer in 'Source\Application\Middlewares\Application.Middlewares.SingletonPerScopeFinalizer.pas';
 
 {$R *.res}
 
@@ -51,22 +52,6 @@ begin
     begin
       Handled := False;
       Result := THandleCommandResult.Unknown;
-
-      // Write here your custom command for the REPL using the following form...
-      // ***
-      // Handled := False;
-      // if (Value = 'apiversion') then
-      // begin
-      // REPLEmit('Print my API version number');
-      // Result := THandleCommandResult.Continue;
-      // Handled := True;
-      // end
-      // else if (Value = 'datetime') then
-      // begin
-      // REPLEmit(DateTimeToStr(Now));
-      // Result := THandleCommandResult.Continue;
-      // Handled := True;
-      // end;
     end;
 
   LServer := TIdHTTPWebBrokerBridge.Create(nil);
@@ -123,6 +108,8 @@ begin
       WebRequestHandler.WebModuleClass := WebModuleClass;
     WebRequestHandlerProc.MaxConnections := 1024;
 
+    // Spring container configurations
+    RegisterDependencies;
     GlobalContainer.Build;
 
     RunServer(8080);

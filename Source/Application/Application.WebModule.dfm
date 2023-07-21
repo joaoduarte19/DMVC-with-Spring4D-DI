@@ -1,4 +1,4 @@
-object ServerWebModule: TServerWebModule
+object AppWebModule: TAppWebModule
   OldCreateOrder = False
   OnCreate = WebModuleCreate
   OnDestroy = WebModuleDestroy

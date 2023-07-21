@@ -1,4 +1,4 @@
-unit UCustomer.Controller;
+unit Application.Controllers.Customer;
 
 interface
 
@@ -6,7 +6,7 @@ uses
   MVCFramework,
   MVCFramework.Commons,
   MVCFramework.Serializer.Commons,
-  UCustomer.Interfaces,
+  Domain.Interfaces.Customer,
   Spring.Container.Common;
 
 type
@@ -48,10 +48,8 @@ implementation
 
 uses
   System.SysUtils,
-  MVCFramework.Controllers.Register,
   MVCFramework.Logger,
-  Spring.Container,
-  UCustomer.Entity;
+  Domain.Entities.Customer;
 
 // Sample CRUD Actions for a "Customer" entity
 procedure TCustomerController.GetCustomers;
@@ -109,15 +107,5 @@ begin
   Log.Info('%s - TCustomerController.Destroy', [FGuid.ToString], 'life_cicle');
   inherited;
 end;
-
-initialization
-
-TControllersRegister.Instance.RegisterController(TCustomerController,
-  function: TMVCController
-  begin
-    Result := GlobalContainer.Resolve<TCustomerController>;
-  end);
-
-GlobalContainer.RegisterType<TCustomerController>;
 
 end.

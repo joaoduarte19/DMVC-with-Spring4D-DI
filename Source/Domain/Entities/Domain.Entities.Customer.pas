@@ -1,4 +1,4 @@
-unit UCustomer.Entity;
+unit Domain.Entities.Customer;
 
 interface
 
